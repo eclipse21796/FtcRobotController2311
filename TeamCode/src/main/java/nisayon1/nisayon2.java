@@ -1,19 +1,27 @@
 package nisayon1;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
-public class driveing {
 
-private DcMotor leftWheel;// מנוע שמאל
-private DcMotor rightWheel;// מנוע ימין
-private Servo elevator; // מעלית
 
+public class nisayon2 extends LinearOpMode{
+
+    private DcMotor leftWheel;// מנוע שמאל
+    private DcMotor rightWheel;// מנוע ימין
+    private Servo elevator; // מעלית
+
+    @Override
+    public void runOpMode() {
+
+    }
+
+
+    @TeleOp(name="drive", group="Linear OpMode")
+//    @Disabled
     public class BasicOmniOpMode_Linear extends LinearOpMode {
 
 
@@ -27,11 +35,10 @@ private Servo elevator; // מעלית
 
             telemetry.addData("Status", "Initialized");
             telemetry.update();
-            float[] movementVector = new float[] {0, 0};
+
             waitForStart();
-            if (isStopRequested()) return;
-            resetRuntime(); 
-            while (opModeIsActive()) {
+            float[] movementVector = new float[] {0, 0};
+            while (opModeIsActive()) { // one of the joystick sticks is moved
                 leftWheel.setPower(gamepad1.left_stick_y);
                 rightWheel.setPower(gamepad1.left_stick_y);
                 movementVector[0] = gamepad1.right_stick_y; // left wheel
@@ -50,7 +57,7 @@ private Servo elevator; // מעלית
 
 
 
-            }
-        }}
+        }
+    }}
 
 
