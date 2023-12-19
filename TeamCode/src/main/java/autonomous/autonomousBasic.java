@@ -17,7 +17,7 @@ public class autonomousBasic extends LinearOpMode {
     final double TICKS_REV_CM = (TICKS_PER_REV/GEAR_RATIO)/PERIMETER;
     final double WHEELS_DISTANCE = 10; // TODO: לבדוק בסרגל מרחק של הגלגלים
     final double CM_PER_DEGREE = ((WHEELS_DISTANCE*Math.PI)/360)/2;
-    final int HEIGHT = 1000; //TODO; לאיזה גובה צריך לעלות
+    final int HEIGHT = -100;
     final int HEIGHT_OFF = 0;
 
     DcMotor rightWheel;
@@ -54,13 +54,13 @@ public class autonomousBasic extends LinearOpMode {
 
         waitForStart();
 
-        driveY(5,1);
-        turn(90,0.5);
-        raiseHand1();
-        driveY(5,1);
-        raiseHandOff();
 
         while (opModeIsActive()){
+          driveY(10,1);
+          turn(90,0.5);
+          raiseHand1();
+          driveY(5,1);
+          raiseHandOff();
         }
     }
 

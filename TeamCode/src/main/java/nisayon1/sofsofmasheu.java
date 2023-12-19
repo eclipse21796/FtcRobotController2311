@@ -17,7 +17,8 @@ import com.qualcomm.robotcore.hardware.Servo;
             DcMotor rightWheel = hardwareMap.dcMotor.get("rightWheel");
             DcMotor leftWheel  = hardwareMap.dcMotor.get("leftWheel" );
             DcMotor hand1 = hardwareMap.dcMotor.get("hand1");
-            Servo lucifer = hardwareMap.servo.get("lucifer"); // TODO: להוסיף לקונפיגורציה בדרייבר האב
+            Servo lucifer = hardwareMap.servo.get("lucifer");
+            Servo servo1 = hardwareMap.servo.get("servo1");
 
             rightWheel.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -26,13 +27,16 @@ import com.qualcomm.robotcore.hardware.Servo;
             resetRuntime();
 
             boolean xIsPressed = false;
+            boolean BIsPressed = false;
+
 
             while (opModeIsActive()) {
 
                 leftWheel.setPower(gamepad1.right_stick_y);
-                rightWheel.setPower(gamepad1.right_stick_y);
+                rightWheel.setPower(gamepad1.left_stick_y);
                 hand1.setPower((gamepad1.right_trigger));
                 hand1.setPower((-gamepad1.left_trigger));
+
 
                 if (gamepad1.x && !xIsPressed){
                     xIsPressed = true;
@@ -42,22 +46,36 @@ import com.qualcomm.robotcore.hardware.Servo;
                 }
                 else if (!gamepad1.x) xIsPressed = false;
 
-                double leftPower = gamepad1.right_stick_y + gamepad1.left_stick_x;
-                double rigthPower = gamepad1.right_stick_y - gamepad1.left_stick_x;
 
-                if (leftPower>1||rigthPower>1){
-                    double maxPower = Math.max(leftPower,rigthPower);
-                    leftPower = leftPower/maxPower;
-                    rigthPower = rigthPower/maxPower;
-
+                if (gamepad1.b && !BIsPressed){
+                    BIsPressed = true;
+                    if (servo1.getPosition()==1 )
+                        servo1.setPosition(0);
+                    else servo1.setPosition(1);
                 }
-                leftWheel.setPower(leftPower);
-                rightWheel.setPower(rigthPower);
+                else if (!gamepad1.b) BIsPressed = false;
+
+
+               // double leftPower = gamepad1.right_stick_y + gamepad1.right_stick_x;
+              //  double rigthPower = gamepad1.right_stick_y - gamepad1.right_stick_x;
+
+
+
+             //   if (leftPower>1||rigthPower>1){
+             //       double maxPower = Math.max(leftPower,rigthPower);
+              //      leftPower = leftPower/maxPower;
+               //     rigthPower = rigthPower/maxPower;
+
+                //  leftWheel.setPower(leftPower);
+                //  rightWheel.setPower(rigthPower);
 
                 if (gamepad1.left_trigger==0&&gamepad1.right_trigger==0);
-                    hand1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                hand1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+                }
+
             }
 }
-    }
+
 
 
