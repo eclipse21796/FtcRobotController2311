@@ -15,10 +15,12 @@ public class autonomousBasic extends LinearOpMode {
     final double PERIMETER = 2*RADIOS*Math.PI;
     final double GEAR_RATIO = 45.0/90.0;
     final double TICKS_REV_CM = (TICKS_PER_REV/GEAR_RATIO)/PERIMETER;
-    final double WHEELS_DISTANCE = 10; // TODO: לבדוק בסרגל מרחק של הגלגלים
+    final double WHEELS_DISTANCE = 27.5;
     final double CM_PER_DEGREE = ((WHEELS_DISTANCE*Math.PI)/360)/2;
     final int HEIGHT = -100;
     final int HEIGHT_OFF = 0;
+    final int LEVEL_OF_ERROR = 10;
+    final double ANGLE_ADAPTER =1.97;
 
     DcMotor rightWheel;
     DcMotor leftWheel;
@@ -53,14 +55,14 @@ public class autonomousBasic extends LinearOpMode {
         hand1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         waitForStart();
-
+       driveY(50,1);
+      // turn(360,0.5);
+       // raiseHand1();
+       // driveY(5,1);
+       // raiseHandOff();
 
         while (opModeIsActive()){
-          driveY(10,1);
-          turn(90,0.5);
-          raiseHand1();
-          driveY(5,1);
-          raiseHandOff();
+
         }
     }
 
@@ -68,11 +70,15 @@ public class autonomousBasic extends LinearOpMode {
         leftWheel.setPower(power);
         rightWheel.setPower(power);
 
-        leftWheel.setTargetPosition(leftWheel.getTargetPosition()+(int) Math.round(cm*TICKS_REV_CM));
-        rightWheel.setTargetPosition(rightWheel.getTargetPosition()+(int) Math.round(cm*TICKS_REV_CM));
+        leftWheel.setTargetPosition(leftWheel.getTargetPosition()+(int) Math.round(cm*TICKS_REV_CM * ANGLE_ADAPTER));
+        rightWheel.setTargetPosition(rightWheel.getTargetPosition()+(int) Math.round(cm*TICKS_REV_CM * ANGLE_ADAPTER));
 
         leftWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        while(Math.abs(rightWheel.getCurrentPosition()-rightWheel.getTargetPosition()) > LEVEL_OF_ERROR &&
+                Math.abs(leftWheel.getCurrentPosition()-leftWheel.getTargetPosition()) > LEVEL_OF_ERROR &&
+        opModeIsActive()){}
 
     }
 
@@ -80,11 +86,15 @@ public class autonomousBasic extends LinearOpMode {
         leftWheel.setPower(power);
         rightWheel.setPower(power);
 
-        leftWheel.setTargetPosition(leftWheel.getTargetPosition()-(int) Math.round(degree*CM_PER_DEGREE*TICKS_REV_CM));
-        rightWheel.setTargetPosition(rightWheel.getTargetPosition()+(int) Math.round(degree*CM_PER_DEGREE*TICKS_REV_CM));
+        leftWheel.setTargetPosition(leftWheel.getTargetPosition()-(int) Math.round(degree*CM_PER_DEGREE*TICKS_REV_CM * ANGLE_ADAPTER));
+        rightWheel.setTargetPosition(rightWheel.getTargetPosition()+(int) Math.round(degree*CM_PER_DEGREE*TICKS_REV_CM * ANGLE_ADAPTER));
 
         leftWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        while(Math.abs(rightWheel.getCurrentPosition()-rightWheel.getTargetPosition()) > LEVEL_OF_ERROR &&
+                Math.abs(leftWheel.getCurrentPosition()-leftWheel.getTargetPosition()) > LEVEL_OF_ERROR &&
+                opModeIsActive()){}
 
     }
     public void raiseHand1 (){
