@@ -35,10 +35,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 
                 leftWheel.setPower(gamepad1.right_stick_y);
                 rightWheel.setPower(gamepad1.left_stick_y);
-                hand1.setPower((gamepad2.right_trigger)*0.8);
-                hand1.setPower((gamepad2.left_trigger)*0.8);
-                hand2.setPower((-gamepad1.left_trigger)*0.8);
-                hand2.setPower((gamepad1.right_trigger)*0.8);
+                hand1.setPower((gamepad1.right_trigger)*0.8);
+                hand1.setPower((gamepad1.left_trigger)*0.8);
+                hand2.setPower((-gamepad2.left_trigger)*0.8);
+                hand2.setPower((gamepad2.right_trigger)*0.8);
 
 
                 if (gamepad1.x && !xIsPressed){
@@ -75,7 +75,7 @@ import com.qualcomm.robotcore.hardware.Servo;
                 if (gamepad1.left_trigger==0&&gamepad1.right_trigger==0);
                 hand1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-                if (gamepad1.left_trigger==0&&gamepad1.right_trigger==0);
+                if (gamepad2.left_trigger==0&&gamepad2.right_trigger==0);
                 hand1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
                 }
