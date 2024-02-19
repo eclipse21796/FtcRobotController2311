@@ -1,13 +1,12 @@
-package nisayon1;
+package OptimusPrime;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@TeleOp
+//@TeleOp
 public class DriveTrain extends LinearOpMode {
-    @Override
+   //  @Override
     public void runOpMode() {
 
         // region GET DRIVETRAIN MOTORS

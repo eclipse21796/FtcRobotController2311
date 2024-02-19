@@ -1,12 +1,9 @@
-package nisayon1;
+package OptimusPrime;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class driveing {
 
@@ -17,7 +14,7 @@ private Servo elevator; // מעלית
     public class BasicOmniOpMode_Linear extends LinearOpMode {
 
 
-        @Override
+       // @Override
         public void runOpMode() {
             leftWheel = hardwareMap.get(DcMotor.class,"leftWheel"); // השם של המנוע כמו שהוא מופיע בדרייבר האב
             rightWheel = hardwareMap.get(DcMotor.class,"rightWheel");
