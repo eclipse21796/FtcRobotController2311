@@ -63,8 +63,11 @@ public class test extends LinearOpMode {
             //leftWheel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             //rightWheel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+            leftWheel.setPower(gamepad1.left_stick_y*(gamepad1.left_stick_y > 0? 1:0.65));
+            rightWheel.setPower(gamepad1.right_stick_y*(gamepad1.right_stick_y > 0? 1:0.65));
             //*(gamepad1.left_stick_y > 0? 1:0.65));
             //*(gamepad1.right_stick_y > 0? 1:0.65));
+
             if (gamepad1.y)
             { hand1.setPower(1);
               //  rightWheel.setPower(1);

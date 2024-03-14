@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous
-public class autonomousBLUEBasic extends LinearOpMode {
+public class autonomousBasic extends LinearOpMode {
 
 
     final double TICKS_PER_REV = 537.7;
@@ -69,21 +69,23 @@ public class autonomousBLUEBasic extends LinearOpMode {
         hand2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         waitForStart();
-       driveY(-80,1);
-      // turn(360,0.5);
-       // raiseHand1();
-       //driveY(5,1);
-       // raiseHandOff();
-      // releasePixel();
+        driveY(80,1);
+        // turn(360,0.5);
+        // raiseHand1();
+        //driveY(5,1);
+        // raiseHandOff();
+        // releasePixel();
 
 
         while (opModeIsActive()){
+
+
 
         }
     }
 
     public void driveY (double cm,double power){
-        leftWheel.setPower(power);
+        leftWheel.setPower((power));
         rightWheel.setPower((power)*0.5);
 
         leftWheel.setTargetPosition(leftWheel.getTargetPosition()+(int) Math.round(cm*TICKS_REV_CM * AENGTH_ADAPTER));
@@ -94,7 +96,7 @@ public class autonomousBLUEBasic extends LinearOpMode {
 
         while(Math.abs(rightWheel.getCurrentPosition()-rightWheel.getTargetPosition()) > LEVEL_OF_ERROR &&
                 Math.abs(leftWheel.getCurrentPosition()-leftWheel.getTargetPosition()) > LEVEL_OF_ERROR &&
-        opModeIsActive()){}
+                opModeIsActive()){}
         rightWheel.setPower(0);
         leftWheel.setPower(0);
     }
@@ -133,10 +135,11 @@ public class autonomousBLUEBasic extends LinearOpMode {
     }
 
     public void releasePixel (){
-    lucifer.setPosition(0);
+        lucifer.setPosition(0);
 
 
 
     }
 }
+
 

@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
     @Override // מופיע ב driver hub
     public void runOpMode() {
 
+        boolean isDpadUpPressed = false;
 
         DcMotor rightWheel = hardwareMap.dcMotor.get("rightWheel"); // גלגל ימני
         DcMotor leftWheel = hardwareMap.dcMotor.get("leftWheel"); // גלגל שמאלי
@@ -35,17 +36,26 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 
         while (opModeIsActive()) { // כל עוד התוכנה רצה, תפעיל:
+
             leftWheel.setPower(gamepad1.right_stick_y);  // המנוע עובד לפי הכוח של gamepad1.right_stick_y
             rightWheel.setPower(gamepad1.left_stick_y); // המנוע עובד לפי הכוח של gamepad1.left_stick_y
 
-            hand1.setPower((-gamepad1.right_trigger)); // המנוע עובד לפי הכוח של -gamepad1.right_trigger
-            hand1.setPower((gamepad1.left_trigger));// המנוע עובד לפי הכוח של gamepad1.left_trigger
-            hand1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); // המנוע עוצר איפה שהוא
 
-            hand2.setPower((-gamepad1.right_trigger)); //המנוע עובד לפי הכוח של -gamepad1.right_trigger
-            hand2.setPower((gamepad1.left_trigger)); //המנוע עובד לפי הכוח של gamepad1.left_trigger
-            hand2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); // המנוע עוצר איפה שהוא
+            if(!isDpadUpPressed){
+                hand1.setPower((-gamepad1.right_trigger)); // המנוע עובד לפי הכוח של -gamepad1.right_trigger
+                hand1.setPower((gamepad1.left_trigger));// המנוע עובד לפי הכוח של gamepad1.left_trigger
+                hand1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); // המנוע עוצר איפה שהוא
 
+                hand2.setPower((-gamepad1.right_trigger)); //המנוע עובד לפי הכוח של -gamepad1.right_trigger
+                hand2.setPower((gamepad1.left_trigger)); //המנוע עובד לפי הכוח של gamepad1.left_trigger
+                hand2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); // המנוע עוצר איפה שהוא
+            }
+
+            if (gamepad1.dpad_up){
+                isDpadUpPressed = true;
+                hand1.setPower(1);
+                hand2.setPower(1);
+            }
 
 
             if (gamepad1.x){ // כש gamepad1.x לחוץ

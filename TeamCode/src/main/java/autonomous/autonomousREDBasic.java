@@ -69,12 +69,15 @@ public class autonomousREDBasic extends LinearOpMode {
         hand2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         waitForStart();
-        driveY(-80,1);
-        // turn(360,0.5);
-        // raiseHand1();
-        //driveY(5,1);
-        // raiseHandOff();
-        // releasePixel();
+        driveY(100,1);
+        //sleep(6000);
+        //driveY(-30, 0.4);
+      // driveY(40,1);
+      // turn(360,0.5);
+       // raiseHand1();
+       //driveY(5,1);
+       // raiseHandOff();
+      // releasePixel();
 
 
         while (opModeIsActive()){
@@ -83,7 +86,7 @@ public class autonomousREDBasic extends LinearOpMode {
     }
 
     public void driveY (double cm,double power){
-        leftWheel.setPower((power));
+        leftWheel.setPower(power);
         rightWheel.setPower((power));
 
         leftWheel.setTargetPosition(leftWheel.getTargetPosition()+(int) Math.round(cm*TICKS_REV_CM * AENGTH_ADAPTER));
@@ -94,7 +97,7 @@ public class autonomousREDBasic extends LinearOpMode {
 
         while(Math.abs(rightWheel.getCurrentPosition()-rightWheel.getTargetPosition()) > LEVEL_OF_ERROR &&
                 Math.abs(leftWheel.getCurrentPosition()-leftWheel.getTargetPosition()) > LEVEL_OF_ERROR &&
-                opModeIsActive()){}
+        opModeIsActive()){}
         rightWheel.setPower(0);
         leftWheel.setPower(0);
     }
@@ -133,11 +136,10 @@ public class autonomousREDBasic extends LinearOpMode {
     }
 
     public void releasePixel (){
-        lucifer.setPosition(0);
+    lucifer.setPosition(0);
 
 
 
     }
 }
-
 
