@@ -50,8 +50,8 @@ public class cameraTest {
         //נקודה ברזולוציה
         static final Point CENTER_TOP_LEFT = new Point(915,320);
         static final Point CENTER_BOTTOM_RIGHT = new Point(1025,420);
-        static final Point RIGHT_TOP_LEFT = new Point(425,295);
-        static final Point RIGHT_BOTTOM_RIGHT = new Point(610,405);
+        static final Point LEFT_TOP_LEFT = new Point(425,295);
+        static final Point LEFT_BOTTOM_RIGHT = new Point(610,405);
         static final Scalar RED = new Scalar(245,0,0); //TODO המספר הסידורי של הפרופ
 
         Mat YCrCb = new Mat();
@@ -79,7 +79,7 @@ public class cameraTest {
          Imgproc.cvtColor(frame,YCrCb,Imgproc.COLOR_RGB2YCrCb);
          Core.extractChannel(YCrCb,Cb,0);
 
-         leftCb = Cb.submat(new Rect(RIGHT_TOP_LEFT,RIGHT_BOTTOM_RIGHT));
+         leftCb = Cb.submat(new Rect(LEFT_TOP_LEFT,LEFT_BOTTOM_RIGHT));
          centerCb = Cb.submat(new Rect(CENTER_TOP_LEFT,CENTER_BOTTOM_RIGHT));
 
      }
@@ -93,7 +93,7 @@ public class cameraTest {
          leftAvg = (int) Core.mean(leftCb).val[0];
          centerAvg = (int) Core.mean(centerCb).val[0];
 
-         Imgproc.rectangle(input,RIGHT_TOP_LEFT,RIGHT_BOTTOM_RIGHT,RED,15);
+         Imgproc.rectangle(input,LEFT_TOP_LEFT,LEFT_BOTTOM_RIGHT,RED,15);
          Imgproc.rectangle(input,CENTER_TOP_LEFT,CENTER_BOTTOM_RIGHT,RED,15);
 
          opMode.telemetry.addData("left",leftAvg);
