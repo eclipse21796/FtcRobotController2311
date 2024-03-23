@@ -25,7 +25,6 @@ public class cameraTest {
     imageProcessorPipeline pipeline;
 
 
-
     public cameraTest(HardwareMap map,LinearOpMode opMode){
         camera = OpenCvCameraFactory.getInstance().createWebcam(map.get(WebcamName.class,"camera1"));
         pipeline = new imageProcessorPipeline(opMode);
@@ -48,10 +47,10 @@ public class cameraTest {
  public static class imageProcessorPipeline extends OpenCvPipeline{
 
         //נקודה ברזולוציה
-        static final Point CENTER_TOP_LEFT = new Point(915,320);
-        static final Point CENTER_BOTTOM_RIGHT = new Point(1025,420);
-        static final Point LEFT_TOP_LEFT = new Point(425,295);
-        static final Point LEFT_BOTTOM_RIGHT = new Point(610,405);
+        static final Point CENTER_TOP_LEFT = new Point(876,310);
+        static final Point CENTER_BOTTOM_RIGHT = new Point(1016,471);
+        static final Point LEFT_TOP_LEFT = new Point(395,260);
+        static final Point LEFT_BOTTOM_RIGHT = new Point(580,461);
         static final Scalar RED = new Scalar(245,0,0); //TODO המספר הסידורי של הפרופ
 
         Mat YCrCb = new Mat();
@@ -66,11 +65,9 @@ public class cameraTest {
 
 
 
-
      public enum Position{
          LEFT,RIGHT,CENTER
      }
-
 
 
      @Override
@@ -105,11 +102,11 @@ public class cameraTest {
      }
      public Position position(){
 
-         if (leftAvg > centerAvg && leftAvg > 115){
+         if (leftAvg < 80){
              return Position.LEFT;
 
          }
-        else if (centerAvg > 115){
+        else if (centerAvg < 80){
             return Position.CENTER;
          }
         else {
@@ -120,7 +117,6 @@ public class cameraTest {
      public imageProcessorPipeline(LinearOpMode O){
          opMode = O;
      }
-
 
  }
 
